@@ -1,0 +1,14 @@
+:root {
+  --primary-indigo: #6C63FF;
+  --light-indigo: #f3f0ff;
+  --white: #ffffff;
+  --text-dark: #2c3e50;
+  --bg-color: #fbf9ff;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color) !important;
+  color: var(--text-dark);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}

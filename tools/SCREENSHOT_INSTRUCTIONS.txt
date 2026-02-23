@@ -1,0 +1,47 @@
+Quick Screenshot Instructions for SE2 LAB 6
+
+Overview
+This helper captures the entire primary screen and saves it as a PNG. For each required lab screenshot, bring the intended window (browser, terminal, or DB console) to the foreground so it fills the screen or is clearly visible, then run the script below.
+
+How to run (PowerShell, from project root or tools folder)
+# If you aren't in project root:
+cd C:\Users\ACER\Desktop\se2-lab6-front
+
+# Example usage (run after bringing the browser/terminal to front):
+# 1) Capture the local app in your browser
+powershell -ExecutionPolicy Bypass -File .\tools\take_screenshot.ps1 frontend_local.png
+
+# 2) Capture package.json (open in editor) or terminal showing npm run build success
+powershell -ExecutionPolicy Bypass -File .\tools\take_screenshot.ps1 package_json.png
+powershell -ExecutionPolicy Bypass -File .\tools\take_screenshot.ps1 build_success.png
+
+# 3) Capture the live GitHub Pages site (after deploy)
+powershell -ExecutionPolicy Bypass -File .\tools\take_screenshot.ps1 frontend_live.png
+
+# 4) Backend / Render screenshots (open Render dashboard)
+powershell -ExecutionPolicy Bypass -File .\tools\take_screenshot.ps1 render_running.png
+
+# 5) Database screenshots (Railway/PlanetScale console)
+powershell -ExecutionPolicy Bypass -File .\tools\take_screenshot.ps1 db_created.png
+powershell -ExecutionPolicy Bypass -File .\tools\take_screenshot.ps1 db_connection.png
+
+# 6) System verification (app showing AI response + DB row). You may capture two screenshots:
+powershell -ExecutionPolicy Bypass -File .\tools\take_screenshot.ps1 system_ui.png
+powershell -ExecutionPolicy Bypass -File .\tools\take_screenshot.ps1 system_db_row.png
+
+# 7) Ethics reflection text file (open in editor) or screenshot
+powershell -ExecutionPolicy Bypass -File .\tools\take_screenshot.ps1 ethics_reflection.png
+
+# 8) Sent email confirmation (open your email Sent folder showing the message)
+powershell -ExecutionPolicy Bypass -File .\tools\take_screenshot.ps1 email_sent.png
+
+Tips
+- Bring the exact window you want captured to the front and make it as large as possible.
+- For browser screenshots, include the URL bar (resize the window so the address bar is visible at the top).
+- For terminal screenshots, make sure the relevant lines (success messages, URLs, logs) are visible and not scrolled off-screen.
+- Filenames suggested above match the lab submission list.
+
+Automation idea (optional)
+If you want fully automated screenshots of web pages (local or deployed), I can provide a Node script using Playwright that opens the page headlessly and saves a screenshot (works well for the live frontend and Render service pages). Say "auto screenshots" and I'll add it.
+
+If you want me to run the dev server or produce any of the pages locally and try to capture screenshots here, say so and I'll run the commands and share the terminal output.
