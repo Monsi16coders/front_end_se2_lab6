@@ -2,9 +2,16 @@
   <div class="wellness-app">
     <div class="content-wrapper">
       <header class="hero">
-        <div class="logo"></div>
-        <h1>Wellness Tracker</h1>
-        <p>Your mental health journey, one day at a time.</p>
+        <div class="hero-row">
+          <div class="logo">🌿</div>
+          <div>
+            <h1>Jerick Wellness</h1>
+            <p class="muted">Small daily reflections — simple progress.</p>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <div class="chip">👤 Jerick</div>
+        </div>
       </header>
 
       <div class="main-layout">
@@ -34,7 +41,7 @@
           
           <div class="input-group">
             <label>Journal Entry</label>
-            <textarea v-model="newEntry.journal_entry" placeholder="What's on your mind, Charles?"></textarea>
+            <textarea v-model="newEntry.journal_entry" placeholder="Write something for today, Jerick..."></textarea>
           </div>
 
           <div v-if="aiMessage" class="ai-box">
@@ -110,30 +117,35 @@ onMounted(fetchHistory);
 
 <style scoped>
 .wellness-app { 
-  background-color: #f4f7f4 !important; 
   min-height: 100vh; 
   width: 100vw; 
   display: flex; 
   justify-content: center; 
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-  color: #333; 
+  color: var(--text-dark);
 }
 
 .content-wrapper { 
   width: 100%; 
   max-width: 1100px; 
-  padding: 40px 20px; 
+  padding: 36px 20px; 
 }
 
 .hero { 
-  text-align: center; 
-  margin-bottom: 40px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
 }
+
+.hero-row { display:flex; gap:12px; align-items:center; }
+.hero .muted { color: var(--muted); margin:0; }
+.hero-actions { display:flex; align-items:center; gap:12px; }
 
 .main-layout { 
   display: grid; 
-  grid-template-columns: 1fr 1.2fr; 
-  gap: 40px; 
+  grid-template-columns: 1fr 1.1fr; 
+  gap: 28px; 
   align-items: start; 
 }
 
@@ -142,68 +154,67 @@ onMounted(fetchHistory);
 }
 
 .card { 
-  background: white; 
-  padding: 30px; 
-  border-radius: 20px; 
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
-  text-align: center; 
+  background: var(--card-white); 
+  padding: 26px; 
+  border-radius: 16px; 
+  box-shadow: 0 8px 20px rgba(16,42,67,0.06); 
+  text-align: left; 
   position: sticky;
   top: 20px;
 }
 
-.emoji-display { font-size: 5rem; margin-bottom: 10px; }
-.slider { width: 100%; margin: 20px 0; accent-color: #27ae60; cursor: pointer; }
+.emoji-display { font-size: 4.6rem; margin-bottom: 6px; }
+.slider { width: 100%; margin: 18px 0; accent-color: var(--primary); cursor: pointer; }
 .input-group { text-align: left; margin-top: 20px; }
 
 textarea { 
   width: 100%; 
   height: 120px; 
   padding: 15px; 
-  border: 2px solid #eee; 
+  border: 2px solid rgba(0,0,0,0.06); 
   border-radius: 12px; 
   box-sizing: border-box; 
   resize: none; 
   font-size: 1rem; 
-  transition: border 0.3s;
+  transition: border 0.3s, box-shadow 0.2s;
 }
 
 textarea:focus {
   outline: none;
-  border-color: #27ae60;
+  border-color: var(--primary);
+  box-shadow: 0 6px 18px rgba(108,99,255,0.06);
 }
 
 .btn-primary { 
   width: 100%; 
-  padding: 15px; 
-  background: #27ae60; 
+  padding: 12px 18px; 
+  background: linear-gradient(90deg, var(--primary), var(--accent)); 
   color: white; 
   border: none; 
-  border-radius: 12px; 
-  font-weight: bold; 
+  border-radius: 999px; 
+  font-weight: 700; 
   cursor: pointer; 
-  margin-top: 20px; 
-  font-size: 1rem;
-  transition: transform 0.2s, background 0.3s;
+  margin-top: 18px; 
+  font-size: 0.98rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 6px 18px rgba(108,99,255,0.12);
 }
 
-.btn-primary:hover { 
-  background: #219150; 
-  transform: translateY(-2px);
-}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(108,99,255,0.14); }
 
 .ai-box { 
-  margin: 20px 0; 
-  padding: 15px; 
-  background: #f1f8e9; 
-  border-radius: 12px; 
-  border-left: 5px solid #27ae60; 
+  margin: 18px 0; 
+  padding: 14px; 
+  background: rgba(108,99,255,0.06); 
+  border-radius: 10px; 
+  border-left: 4px solid var(--primary); 
   text-align: left; 
 }
 
-.ai-box p { margin: 5px 0 0; color: #2e7d32; font-style: italic; }
+.ai-box p { margin: 6px 0 0; color: rgba(15,23,36,0.7); font-style: italic; }
 
-.history-section h3 { margin-top: 0; margin-bottom: 20px; }
-.history-scroll { max-height: 75vh; overflow-y: auto; padding-right: 10px; }
+.history-section h3 { margin-top: 0; margin-bottom: 18px; }
+.history-scroll { max-height: 72vh; overflow-y: auto; padding-right: 10px; }
 
 /* Custom Scrollbar Restored 🛠️ */
 .history-scroll::-webkit-scrollbar { width: 6px; }
@@ -211,53 +222,39 @@ textarea:focus {
 .history-scroll::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
 
 .mood-card { 
-  background: white; 
-  margin-bottom: 15px; 
-  padding: 18px; 
-  border-radius: 15px; 
+  background: var(--card-white); 
+  margin-bottom: 14px; 
+  padding: 16px; 
+  border-radius: 12px; 
   display: flex; 
   align-items: center; 
-  gap: 20px; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
-  border-left: 6px solid #27ae60;
+  gap: 16px; 
+  box-shadow: 0 6px 18px rgba(16,42,67,0.04); 
+  border-left: 6px solid var(--primary);
 }
 
 .mood-badge { 
-  min-width: 50px; 
-  height: 50px; 
+  min-width: 48px; 
+  height: 48px; 
   border-radius: 50%; 
   color: white; 
   display: flex; 
   align-items: center; 
   justify-content: center; 
-  font-weight: bold; 
-  font-size: 1.2rem;
+  font-weight: 700; 
+  font-size: 1.05rem;
 }
 
 .mood-info p { margin: 0; font-size: 1.05rem; line-height: 1.4; }
 .mood-info small { color: #999; display: block; margin-top: 5px; }
 
-.empty-state { text-align: center; color: #aaa; margin-top: 50px; } 
-  .hero .logo { font-size: 2.4rem; }
+.empty-state { text-align: center; color: var(--muted); margin-top: 50px; }
+.hero .logo { font-size: 2.2rem; }
 
-.hero h1 { margin: 0.2rem 0; font-family: 'Georgia', serif; letter-spacing: 0.4px; }
+.hero h1 { margin: 0; font-family: 'Merriweather', serif; letter-spacing: 0.2px; }
 
-.main-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: start; }
+.slider { accent-color: var(--primary); }
 
-.card { text-align: left; }
-
-.slider { accent-color: #6C63FF; }
-
-textarea:focus { border-color: #6C63FF; }
-
-.btn-primary { background: #6C63FF; }
-.btn-primary:hover { background: #5b52e6; }
-
-.ai-box { background: #f3f0ff; border-left: 5px solid #6C63FF; }
-.ai-box p { color: #3c2dff; }
-
-.mood-card { border-left: 6px solid #6C63FF; }
-
-.emoji-display { font-size: 4.6rem; }
+.emoji-display { font-size: 4.4rem; }
 
 </style>
