@@ -5,12 +5,12 @@
         <div class="hero-row">
           <div class="logo">🌿</div>
           <div>
-            <h1>Jerick Wellness</h1>
+            <h1>Monsi Wellness</h1>
             <p class="muted">Small daily reflections — simple progress.</p>
           </div>
         </div>
         <div class="hero-actions">
-          <div class="chip">👤 Jerick</div>
+          <div class="chip">👤 Monsi</div>
         </div>
       </header>
 
@@ -41,7 +41,7 @@
           
           <div class="input-group">
             <label>Journal Entry</label>
-            <textarea v-model="newEntry.journal_entry" placeholder="Write something for today, Jerick..."></textarea>
+            <textarea v-model="newEntry.journal_entry" placeholder="Write something for today, Monsi..."></textarea>
           </div>
 
           <div v-if="aiMessage" class="ai-box">
@@ -80,33 +80,43 @@ const moodEmoji = computed(() => {
 });
 
 const fetchHistory = async () => {
+  console.log("fetchHistory: requesting history from", `${API_URL}/moods`);
   try {
     const res = await axios.get(`${API_URL}/moods`);
+    console.log("fetchHistory: response status", res.status);
     history.value = res.data;
-  } catch (err) { 
-    console.error("Cloud API error:", err); 
+  } catch (err) {
+    console.error("fetchHistory: Cloud API error:", err);
   }
 };
 
 const saveMood = async () => {
+  console.log("saveMood: submit clicked", newEntry.value);
+  // Intentional bug for lab exercise (uncomment to reproduce):
+  // console.log("User mood value:", moodValue); // ReferenceError: moodValue is not defined
+
   if (!newEntry.value.journal_entry) return alert("Write a note first!");
   isSubmitting.value = true;
-  aiMessage.value = ''; 
-  
+  aiMessage.value = '';
+
   try {
-    const response = await axios.post(`${API_URL}/moods`, {
+    const payload = {
       mood_level: parseInt(newEntry.value.mood_level),
       journal_entry: newEntry.value.journal_entry
-    });
-    
+    };
+    console.log("saveMood: sending payload", payload);
+    const response = await axios.post(`${API_URL}/moods`, payload);
+    console.log("saveMood: API response status", response.status, response.data);
+
     aiMessage.value = response.data.ai_response;
     newEntry.value.journal_entry = '';
     await fetchHistory();
     alert("Saved successfully! ✅ Check out your AI response.");
   } catch (err) {
+    console.error("saveMood: API error", err);
     alert("The Cloud API is waking up... give it 30 seconds and try again!");
-  } finally { 
-    isSubmitting.value = false; 
+  } finally {
+    isSubmitting.value = false;
   }
 };
 
